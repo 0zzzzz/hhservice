@@ -1,0 +1,27 @@
+{% load static %}
+<!DOCTYPE html>
+{#{% load staticfiles %}#}
+<html lang="ru-ru">
+<head>
+    <meta charset="utf-8">
+    <title>{% block title %}{{ title|title }}{% endblock %}</title>
+    <link rel="shortcut icon" type="image/png" href="{% static 'favicon.ico' %}"/>
+
+    {% block css %}
+        <link rel="stylesheet" href="{% static 'style.css' %}">
+    {% endblock %}
+
+    {% block js %}
+    {% endblock %}
+
+</head>
+<body>
+
+<div class="container">
+    <div class="login_block">
+        {% block content %}
+        {% endblock %}
+    </div>
+</div>
+</body>
+</html>

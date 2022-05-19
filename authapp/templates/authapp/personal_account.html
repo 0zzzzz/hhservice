@@ -1,0 +1,22 @@
+{% extends 'authapp/base.html' %}
+{% load static %}
+
+{% block content %}
+    <a href="{% url 'index' %}" class="edit_cross"></a>
+    <a href="{% url 'authapp:skills_list' %}">Скиллы</a>
+    <div >
+        Пользователь: {{ account }}<br>
+{#        {{ account.avatar }}<br>#}
+        Возраст: {{ account.age }}<br>
+        Имя: {{ account.first_name }}<br>
+        Фамилия: {{ account.last_name }}<br>
+        Скилы: {% for skill in account.skills.all  %}
+            {{ skill.name }},
+        {% endfor %}
+        <br>
+        <a class="skilladd_button" href={% url 'authapp:skills_add' %}>
+            <span>Добавить Скиллы</span>
+        </a>
+    </div>
+
+{% endblock %}

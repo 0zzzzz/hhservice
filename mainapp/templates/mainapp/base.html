@@ -4,6 +4,7 @@
 <head>
     <title>{% block title %}{{ title|title }}{% endblock %}</title>
     <link rel="shortcut icon" type="image/png" href="{% static 'favicon.ico' %}"/>
+
     {% block css %}
         <link rel="stylesheet" href="{% static 'style.css' %}">
     {% endblock %}
@@ -13,12 +14,18 @@
 
 </head>
 <body>
-<div class="container">
+
+<div class="index_block">
+    {% block menu %}
+            {% include 'mainapp/includes/inc_menu.html' %}
+    {% endblock %}
 
     {% block content %}
     {% endblock %}
-
 </div>
+
+{% block footer %}
+{% endblock %}
 
 </body>
 </html>

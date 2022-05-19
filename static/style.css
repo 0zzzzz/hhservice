@@ -1,0 +1,206 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat:100,300,400,700');
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Montserrat', sans-serif;
+}
+
+html, body {
+    height: 95%;
+    -moz-transform: scale(0.95);
+    -webkit-transform: scale(0.95);
+    transform: scale(0.95);
+}
+
+.container {
+    width: 900px;
+    margin: 0 auto;
+    min-height: 100%;
+}
+
+.login_block {
+    background: #fff;
+    border: 1px solid #eaeaea;
+    border-radius: 25px;
+    overflow: hidden;
+    width: 28em;
+    min-width: 500px;
+    margin: auto;
+    padding: 30px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+}
+
+.index_block {
+    background: #fff;
+    border: 1px solid #eaeaea;
+    border-radius: 25px;
+    overflow: hidden;
+    width: 28em;
+    min-width: 500px;
+    margin: auto;
+    padding: 30px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+}
+
+.edit_cross {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background-image: url(/static/img/edit_cross.png);
+    width: 36px;
+    height: 36px;
+}
+
+.auth_button {
+    text-decoration: none;
+    background: #ffffff;
+    border-radius: 5px;
+    border-style: solid;
+    border-width: 1px;
+    border-color: #000000;
+    font-size: 20px;
+    text-align: center;
+    color: #000000;
+    width: 100%;
+}
+
+.admin_container .menu span {
+    margin-left: 10px;
+    font-weight: bold;
+    letter-spacing: 3px;
+    color: #111;
+}
+
+.admin_menu {
+    display: block;
+    left: 15px;
+    top: 20px;
+    height: 40px;
+    width: 100%;
+}
+
+.admin_menu ul.menu {
+    display: block;
+    /*float: none;*/
+    width: 900px;
+    height: 50px;
+    margin: auto;
+    color: #555;
+}
+
+.menu {
+    list-style-type: none;
+    /*margin-top: 67px;*/
+    /*float: right;*/
+}
+
+.menu li {
+    float: left;
+}
+
+.menu a {
+    list-style-type: none;
+    color: #8c8c8c;
+    font-size: 10px;
+    font-weight: 700;
+    text-align: right;
+    text-transform: uppercase;
+    text-decoration: none;
+    padding: 10px 13px;
+}
+
+.menu .active {
+    color: #000000;
+    font-weight: 700;
+    border-bottom: 3px solid #212121;
+}
+
+.menu a:hover {
+    text-decoration: none;
+    list-style-type: none;
+    color: #212121;
+    font-weight: 700;
+    border-bottom: 3px solid #212121;
+}
+
+.menu a:active {
+    color: #000000;
+    font-weight: 700;
+    border-bottom: 3px solid #212121;
+}
+
+.form_view {
+    background: #fff;
+    border: 1px solid #eaeaea;
+    border-radius: 25px;
+    overflow: hidden;
+    width: 28em;
+    min-width: 500px;
+    margin: auto;
+    padding: 30px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+}
+
+.register_table{
+    display: flex;
+    justify-content: center;
+}
+
+.skills_list {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.skill_record {
+    margin-top: 10px;
+    margin-left: 37px;
+    width: 181px;
+}
+
+.skilladd_button {
+    background-image: url(/static/img/plus_cross.png);
+    background-repeat: no-repeat;
+    height: 36px;
+    border-radius: 5px;
+    font-size: 20px;
+    padding: 3px 10px 9px 44px;
+    text-align: center;
+    color: #555;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.skilladd_button:hover {
+    background-image: url(/static/img/plus_cross_hover.png);
+    text-decoration: none;
+    color: #000000;
+}
+
+
+.skills_list button {
+    border: 1px solid #eaeaea;
+    border-radius: 5px;
+    height: 30px;
+    margin: 5px auto;
+    padding: 0 15px;
+}
+
+.skills_list a {
+     color: #555;
+     text-decoration: none;
+}
+
+.container_box {
+    /*display: flex;*/
+    margin-bottom: 10px;
+}

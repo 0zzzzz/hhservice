@@ -9,6 +9,7 @@
 
     {% block css %}
         <link rel="stylesheet" href="{% static 'style.css' %}">
+        <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
     {% endblock %}
 
     {% block js %}
@@ -19,6 +20,9 @@
 
 <div class="container">
     <div class="login_block">
+        {% block menu %}
+                {% include 'mainapp/includes/inc_menu.html' %}
+        {% endblock %}
         {% block content %}
         {% endblock %}
     </div>

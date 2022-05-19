@@ -8,14 +8,18 @@
     </div>
     <form class="form-horizontal" action="{% url 'auth:login' %}" method="POST" enctype="multipart/form-data">
         {% csrf_token %}
-        {{ login_form.as_p }}
+        <table class="register_table">
+            {{ login_form}}
+        </table>
+
         {% if next %}
             <input type="hidden" name="next" value="{{ next }}">
         {% endif %}
+        <br>
         <input class="auth_button" type="submit" value="Войти">
     </form>
-    <hr>
-    <input class="auth_button" type="button" value="Зарегестрироваться"
-           onClick="window.location='{% url 'auth:register' %}'"/>
+
+{#    <input class="auth_button" type="button" value="Зарегестрироваться"#}
+{#           onClick="window.location='{% url 'auth:register' %}'"/>#}
 {#    <a href="{% url 'social:begin' 'vk-oauth2' %}?next=/" class="auth_button">Войти через <span class="text-primary">VK</span></a>#}
 {% endblock %}

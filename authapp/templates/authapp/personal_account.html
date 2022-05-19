@@ -3,10 +3,9 @@
 
 {% block content %}
     <a href="{% url 'index' %}" class="edit_cross"></a>
-    <a href="{% url 'authapp:skills_list' %}">Скиллы</a>
+
     <div >
         Пользователь: {{ account }}<br>
-{#        {{ account.avatar }}<br>#}
         Возраст: {{ account.age }}<br>
         Имя: {{ account.first_name }}<br>
         Фамилия: {{ account.last_name }}<br>

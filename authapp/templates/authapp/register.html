@@ -6,11 +6,19 @@
     <div class="h2 text-center head">
         Регистрация
     </div>
-    <form  action="{% url 'auth:register' %}" method="POST" enctype="multipart/form-data">
+
+    <form class="form-horizontal" action="{% url 'auth:register' %}" method="POST" enctype="multipart/form-data">
+
         {% csrf_token %}
-        {{ register_form.as_p }}
+        <table class="register_table">
+            {{ register_form }}
+        </table>
+
         <input class="auth_button" type="submit" value="Зарегестрироваться">
     </form>
-    <hr>
-    <input type="button" value="Войти" onClick="window.location='{% url 'auth:login' %}'" />
+    </div>
+
+
+    {#    <hr>#}
+    {#    <input type="button" value="Войти" onClick="window.location='{% url 'auth:login' %}'" />#}
 {% endblock %}

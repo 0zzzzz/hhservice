@@ -2,17 +2,14 @@
 {% load static %}
 
 {% block content %}
-    <div>
-        {% if user.is_authenticated %}
-            <li><a class="log_regedit" href="{% url 'auth:edit' %}">{{ user.first_name|default:'пользователь' }}</a></li>
-            <li><a class="log_entexit" href="{% url 'auth:logout' %}">выйти</a></li>
-        {% else %}
-            <li><a class="log_regedit" href="{% url 'auth:register' %}">регистрация</a></li>
-            <li><a class="log_entexit" href="{% url 'auth:login' %}">войти</a></li>
-        {% endif %}
-        <div>
-            <a href="{% url 'authapp:register' %}">Зарегистрироваться</a>
-            {{ users }}
-        </div>
+    <div class="skill_record">
+        {% for user in users %}
+            <div class="container_box">
+                Пользователь:{{ user }}<br>
+                Возраст:{{ user.age }}<br>
+                Имя:{{ user.first_name }}<br>
+                Фамилия{{ user.last_name }}<br>
+            </div>
+        {% endfor %}
     </div>
 {% endblock %}

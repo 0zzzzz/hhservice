@@ -27,7 +27,7 @@ html, body {
     border: 1px solid #eaeaea;
     border-radius: 25px;
     overflow: hidden;
-    width: 28em;
+    width: 50em;
     min-width: 500px;
     margin: auto;
     padding: 30px;
@@ -41,7 +41,7 @@ html, body {
     border: 1px solid #eaeaea;
     border-radius: 25px;
     overflow: hidden;
-    width: 28em;
+    width: 50em;
     min-width: 500px;
     margin: auto;
     padding: 30px;
@@ -201,6 +201,16 @@ html, body {
 }
 
 .container_box {
-    /*display: flex;*/
+    display: flex;
     margin-bottom: 10px;
+}
+
+.skills_class{
+    display: flex;
+    justify-content: space-between;
+}
+
+.index_block_avatar{
+    height: 150px;
+    margin-right: 10px;
 }

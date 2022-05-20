@@ -70,42 +70,14 @@ class UserSkillsForm(forms.ModelForm):
         label='Скиллы',
         required=False,
     )
+    skills.widget.attrs.update({'class': 'skills_class'})
 
-    # def __init__(self, *args, **kwargs):
-    #     super().__init__(*args, **kwargs)
-    #     for field_name, field in self.fields.items():
-    #         field.widget.attrs['class'] = 'form-control'
-    #         field.help_text = ''
-
-# class MultipleForm(forms.Form):
-#     action = forms.CharField(max_length=60, widget=forms.HiddenInput())
-#
-#
-# class UserSkillsForm(MultipleForm):
-#     skills = forms.ModelMultipleChoiceField(
-#             queryset=Skills.objects.all(),
-#             widget=forms.CheckboxSelectMultiple(),
-#             label='Скиллы',
-#             required=False,
-#         )
-
-
-# class SkillCreateForm(MultipleForm):
-#     name = forms.CharField(max_length=200, widget=forms.TextInput)
 
 class SkillCreateForm(forms.ModelForm):
-    # class Meta:
-    #     model = Skills
-    #     fields = ['name']
-    #
-    # name = forms.CharField()
     class Meta:
         model = Skills
         fields = '__all__'
-    #
-    # # class Meta:
-    # #     model = Skills
-    # #     fields = ['name']
+
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         for field_name, field in self.fields.items():

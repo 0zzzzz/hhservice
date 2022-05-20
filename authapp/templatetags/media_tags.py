@@ -9,5 +9,3 @@ def media_for_users(img_path):
     if not img_path:
         img_path = 'users_avatars/default.jpg'
     return f'{settings.MEDIA_URL}{img_path}'
-
-# register.filter('media_for_users', media_for_users) вместо декоратора

@@ -1,5 +1,8 @@
 <div class="admin_menu">
     <ul class="menu">
+        {% if not 'index' in request.resolver_match.url_name %}
+        <li><a class="log_entexit" href="{% url 'index' %}">главная</a></li>
+        {% endif %}
         {% if user.is_authenticated %}
             <li><a class="log_regedit"
                    href="{% url 'auth:edit' %}">редактировать: {{ user.first_name|default:'пользователь' }}</a></li>

@@ -2,7 +2,7 @@
 {% load static %}
 
 {% block content %}
-    <a href="{% url 'index' %}" class="edit_cross"></a>
+{#    <a href="{% url 'index' %}" class="edit_cross"></a>#}
     <h2>Выберите из представленных</h2>
     <form action="{% url 'authapp:skills_add' %}" method="POST"  enctype="multipart/form-data">
         {% csrf_token %}

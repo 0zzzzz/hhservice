@@ -1,21 +1,25 @@
 {% extends 'authapp/base.html' %}
 {% load static %}
+{% load media_tags %}
 
 {% block content %}
-    <a href="{% url 'index' %}" class="edit_cross"></a>
+{#    <a href="{% url 'index' %}" class="edit_cross"></a>#}
 
     <div >
-        Пользователь: {{ account }}<br>
-        Возраст: {{ account.age }}<br>
-        Имя: {{ account.first_name }}<br>
-        Фамилия: {{ account.last_name }}<br>
-        Скилы: {% for skill in account.skills.all  %}
+    <div class="container_box">
+        <img class="index_block_avatar" src="{{ user.avatar|media_for_users }}" alt="avatar"/>
+        {{ user.first_name }} {{ account.patronymic }} {{ user.last_name }}<br>
+{#        Пользователь:{{ user }}<br>#}
+{#        Возраст:{{ user.age }}<br>#}
+        Скилы: {% for skill in user.skills.all  %}
             {{ skill.name }},
-        {% endfor %}
+        {% endfor %}<br>
+        Языки: {{ account.languages }}<br>
+        Увлечения: {{ account.hobbies }}<br>
         <br>
-        <a class="skilladd_button" href={% url 'authapp:skills_add' %}>
+
+    </div>
+            <a class="skilladd_button" href={% url 'authapp:skills_add' %}>
             <span>Добавить Скиллы</span>
         </a>
-    </div>
-
 {% endblock %}

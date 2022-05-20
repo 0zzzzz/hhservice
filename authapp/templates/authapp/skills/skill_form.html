@@ -2,7 +2,6 @@
 
 {% block content %}
     <div class="admin_block">
-        <a href="{% url 'authapp:account' %}" class="admin_cross"></a>
         <form class="form-horizontal" method="post" enctype="multipart/form-data">
             {% csrf_token %}
             {{ form.as_p }}

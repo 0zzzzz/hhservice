@@ -201,6 +201,16 @@ html, body {
 }
 
 .container_box {
-    /*display: flex;*/
+    display: flex;
     margin-bottom: 10px;
+}
+
+.skills_class{
+    display: flex;
+    justify-content: space-between;
+}
+
+.index_block_avatar{
+    height: 150px;
+    margin-right: 10px;
 }

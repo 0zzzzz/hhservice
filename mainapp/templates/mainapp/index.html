@@ -1,15 +1,30 @@
 {% extends 'mainapp/base.html' %}
 {% load static %}
+{% load media_tags %}
 
 {% block content %}
-    <div class="skill_record">
-        {% for user in users %}
+{#    <div class="skill_record">#}
+        {% for account in accounts %}
             <div class="container_box">
-                Пользователь:{{ user }}<br>
-                Возраст:{{ user.age }}<br>
-                Имя:{{ user.first_name }}<br>
-                Фамилия{{ user.last_name }}<br>
+{#            <div class="container_box">#}
+{#                <img class="index_block_avatar" src="{{ user.avatar|media_for_users }}" alt="avatar"/>#}
+{#                Пользователь:{{ user }}<br>#}
+{#                Возраст:{{ user.age }}<br>#}
+{#                Имя:{{ user.first_name }}<br>#}
+{#                Фамилия{{ user.last_name }}<br>#}
+{#            </div>#}
+                <img class="index_block_avatar" src="{{ account.user.avatar|media_for_users }}" alt="avatar"/>
+{#                Пользователь:{{ account.user }}<br>#}
+{#                Возраст:{{ account.user.age }}<br>#}
+                {{ account.user.first_name }} {{ account.patronymic }} {{ account.user.last_name }}<br>
+                Скилы: {% for skill in account.user.skills.all  %}
+                    {{ skill.name }},
+                {% endfor %}<br>
+                Языки: {{ account.languages }}<br>
+                Увлечения: {{ account.hobbies }}<br>
+                <br>
             </div>
         {% endfor %}
+    </div>
     </div>
 {% endblock %}

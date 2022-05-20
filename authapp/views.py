@@ -16,6 +16,7 @@ from authapp.serializers import HhUserSerializer
 
 
 class AccessMixin:
+    """Делает view доступным только для суперпользователя"""
     @method_decorator(user_passes_test(lambda u: u.is_superuser))
     def dispatch(self, request, *args, **kwargs):
         return super().dispatch(request, *args, **kwargs)
@@ -48,7 +49,7 @@ def logout(request):
 
 
 def register(request):
-    """Страница регистрации новаго пользователя"""
+    """Страница регистрации нового пользователя"""
     if request.method == 'POST':
         register_form = HhUserRegisterForm(request.POST, request.FILES)
         if register_form.is_valid():
@@ -115,7 +116,9 @@ def skills_add(request):
     return render(request, 'authapp/skills_add.html', context)
 
 
-"""Далее CRUD для скилов, доступен только для суперпользователя"""
+"""Далее CRUD для скиллов (доступен только для суперпользователя)"""
+
+
 class SkillCreateView(AccessMixin, CreateView):
     model = Skills
     template_name = 'authapp/skills/skill_form.html'
@@ -151,6 +154,8 @@ class SkillDeleteView(AccessMixin, DeleteView):
 
     def get_success_url(self):
         return reverse('authapp:skills_list')
+
+
 """ CRUD skills"""
 
 

@@ -11,7 +11,7 @@
         {{ user.first_name }} {{ account.patronymic }} {{ user.last_name }}<br>
 {#        Пользователь:{{ user }}<br>#}
 {#        Возраст:{{ user.age }}<br>#}
-        Скилы: {% for skill in user.skills.all  %}
+        Скиллы: {% for skill in user.skills.all  %}
             {{ skill.name }},
         {% endfor %}<br>
         Языки: {{ account.languages }}<br>

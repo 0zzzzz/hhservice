@@ -208,6 +208,7 @@ html, body {
 .skills_class{
     display: flex;
     justify-content: space-between;
+    flex-wrap: wrap;
 }
 
 .index_block_avatar{

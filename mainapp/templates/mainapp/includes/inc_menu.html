@@ -4,8 +4,12 @@
         <li><a class="log_entexit" href="{% url 'index' %}">главная</a></li>
         {% endif %}
         {% if user.is_authenticated %}
-            <li><a class="log_regedit"
-                   href="{% url 'auth:edit' %}">редактировать: {{ user.first_name|default:'пользователь' }}</a></li>
+            {% if user.is_superuser %}
+                <li><a style="color:#ba1b1b" class="log_regedit"
+                   href="{% url 'auth:edit' %}">администратор:{{ user.username }}</a></li>
+            {% else %}
+                <li><a  class="log_regedit" href="{% url 'auth:edit' %}">редактировать: {{ user.first_name|default:'пользователь' }}</a></li>
+            {% endif %}
             <li><a class="log_entexit" href="{% url 'auth:logout' %}">выйти</a></li>
             <li><a class="log_entexit" href="{% url 'auth:account' %}">личный кабинет</a></li>
         {% else %}
@@ -21,7 +25,8 @@
 
         {% endif %}
         {% if user.is_superuser %}
-                <li><a href="{% url 'authapp:skills_list' %}">редактировать cкиллы</a></li>
+                <li><a style="color:#ba1b1b" href="{% url 'authapp:skills_list' %}">cкиллы</a></li>
+                <li><a style="color:#ba1b1b" href="{% url 'auth:users_list' %}">пользователи</a></li>
         {% endif %}
     </ul>
 </div>

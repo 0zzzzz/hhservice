@@ -1,10 +1,9 @@
-from django.contrib.auth import authenticate
 from rest_framework import serializers
 from authapp.models import HhUser
 
 
 class HhUserSerializer(serializers.ModelSerializer):
-
+    """Серриалайзер для модели пользователя(без profile)"""
     class Meta:
         model = HhUser
         fields = '__all__'

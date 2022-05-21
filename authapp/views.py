@@ -36,6 +36,7 @@ def login(request):
         else:
             return HttpResponseRedirect(reverse('index'))
     context = {
+        'title': 'login',
         'login_form': login_form,
         'next': next_param,
     }
@@ -58,6 +59,7 @@ def register(request):
     else:
         register_form = HhUserRegisterForm()
     context = {
+        'title': 'Регистрация',
         'register_form': register_form
     }
     return render(request, 'authapp/register.html', context)
@@ -76,6 +78,7 @@ def edit(request):
         edit_form = HhUserEditForm(instance=request.user)
         edit_profile_form = HhUserProfileEditForm(instance=request.user.hhuserprofile)
     context = {
+        'title': 'Редактирование пользователя',
         'edit_form': edit_form,
         'edit_profile_form': edit_profile_form,
     }
@@ -86,7 +89,7 @@ def edit(request):
 def personal_account(request):
     """Личный кабинет"""
     context = {
-        'title': 'Главная',
+        'title': 'Личный кабинет"',
         'account': HhUserProfile.objects.get(pk=request.user.id),
     }
     return render(request, 'authapp/personal_account.html', context)
@@ -108,7 +111,7 @@ def skills_add(request):
     else:
         skill_form = SkillCreateForm()
     context = {
-        'title': 'Главная',
+        'title': 'Добавление навыков',
         'account': HhUser.objects.get(pk=request.user.id),
         'skill_form': skill_form,
         'user_skills_form': user_skills_form,
@@ -125,15 +128,20 @@ class SkillCreateView(AccessMixin, CreateView):
     success_url = reverse_lazy('authapp:skills_list')
     form_class = SkillCreateForm
 
+    def get_context_data(self, *args, **kwargs):
+        context = super().get_context_data(*args, **kwargs)
+        context['title'] = 'Создание навыка'
+        return context
 
 class SkillsListView(AccessMixin, ListView):
     model = Skills
     template_name = 'authapp/skills/skills.html'
 
     def get_context_data(self, *args, **kwargs):
-        context_data = super().get_context_data(*args, **kwargs)
-        context_data['object_list'] = Skills.objects.all()
-        return context_data
+        context = super().get_context_data(*args, **kwargs)
+        context['object_list'] = Skills.objects.all()
+        context['title'] = 'Список навыков'
+        return context
 
 
 class SkillUpdateView(AccessMixin, UpdateView):
@@ -144,7 +152,7 @@ class SkillUpdateView(AccessMixin, UpdateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['title'] = 'категории/редактирование'
+        context['title'] = 'Редактирование навыка'
         return context
 
 
@@ -155,12 +163,17 @@ class SkillDeleteView(AccessMixin, DeleteView):
     def get_success_url(self):
         return reverse('authapp:skills_list')
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title'] = 'Удаление навыка'
+        return context
+
 
 """ CRUD skills"""
 
 
 class HhUserCreateAPIView(APIView):
-    """Создание пользователя"""
+    """API Создание пользователя"""
     def get(self, request):
         item = HhUser.objects.all()
         serializer = HhUserSerializer(item, many=True)
@@ -175,7 +188,7 @@ class HhUserCreateAPIView(APIView):
 
 
 class HhUserUpdateAPIView(APIView):
-    """Изменение пользователя"""
+    """API Изменение пользователя"""
     def get_object(self, pk):
         try:
             return HhUser.objects.get(pk=pk)

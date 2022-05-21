@@ -22,6 +22,25 @@ class AccessMixin:
         return super().dispatch(request, *args, **kwargs)
 
 
+class DeleteMixin:
+    def delete(self, request, *args, **kwargs):
+        success_url = self.get_success_url()
+        if request.method == 'POST':
+            checkbox = request.POST.get('del_box', None)
+        if checkbox:
+            self.object = self.get_object()
+            self.object.delete()
+            return HttpResponseRedirect(success_url)
+        else:
+            self.object = self.get_object()
+            if self.object.is_active:
+                self.object.is_active = False
+            else:
+                self.object.is_active = True
+            self.object.save()
+            return HttpResponseRedirect(success_url)
+
+
 def login(request):
     """Страница логина"""
     login_form = HhUserLoginForm(data=request.POST or None)
@@ -40,7 +59,7 @@ def login(request):
         'login_form': login_form,
         'next': next_param,
     }
-    return render(request, 'authapp/login.html', context)
+    return render(request, 'authapp/user_auth/login.html', context)
 
 
 def logout(request):
@@ -62,7 +81,7 @@ def register(request):
         'title': 'Регистрация',
         'register_form': register_form
     }
-    return render(request, 'authapp/register.html', context)
+    return render(request, 'authapp/user_auth/register.html', context)
 
 
 def edit(request):
@@ -82,7 +101,7 @@ def edit(request):
         'edit_form': edit_form,
         'edit_profile_form': edit_profile_form,
     }
-    return render(request, 'authapp/edit.html', context)
+    return render(request, 'authapp/user_auth/edit.html', context)
 
 
 @login_required
@@ -92,7 +111,7 @@ def personal_account(request):
         'title': 'Личный кабинет"',
         'account': HhUserProfile.objects.get(pk=request.user.id),
     }
-    return render(request, 'authapp/personal_account.html', context)
+    return render(request, 'authapp/user_auth/personal_account.html', context)
 
 
 @login_required
@@ -116,10 +135,10 @@ def skills_add(request):
         'skill_form': skill_form,
         'user_skills_form': user_skills_form,
     }
-    return render(request, 'authapp/skills_add.html', context)
+    return render(request, 'authapp/user_auth/skills_add.html', context)
 
 
-"""Далее CRUD для скиллов (доступен только для суперпользователя)"""
+"""CRUD для скиллов (доступен только для суперпользователя)"""
 
 
 class SkillCreateView(AccessMixin, CreateView):
@@ -132,6 +151,7 @@ class SkillCreateView(AccessMixin, CreateView):
         context = super().get_context_data(*args, **kwargs)
         context['title'] = 'Создание навыка'
         return context
+
 
 class SkillsListView(AccessMixin, ListView):
     model = Skills
@@ -169,7 +189,54 @@ class SkillDeleteView(AccessMixin, DeleteView):
         return context
 
 
-""" CRUD skills"""
+"""CRUD для управеления пользователями"""
+
+
+class HhUserCreateView(AccessMixin, CreateView):
+    model = HhUser
+    template_name = 'authapp/users_crud/user_form.html'
+    success_url = reverse_lazy('adminapp:user_list')
+    form_class = HhUserRegisterForm
+
+    def get_context_data(self, *args, **kwargs):
+        context = super().get_context_data(*args, **kwargs)
+        context['title'] = 'Создание пользователя'
+        return context
+
+
+class HhUserListView(AccessMixin, ListView):
+    model = HhUser
+    template_name = 'authapp/users_crud/users.html'
+
+    def get_context_data(self, *args, **kwargs):
+        context = super().get_context_data(*args, **kwargs)
+        context['object_list'] = HhUser.objects.all().order_by('-is_active')
+        context['title'] = 'Список пользователей'
+        return context
+
+
+class HhUserUpdateView(AccessMixin, UpdateView):
+    model = HhUser
+    template_name = 'authapp/users_crud/user_form.html'
+    form_class = HhUserEditForm
+    success_url = reverse_lazy('authapp:users_list')
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title'] = 'Редактирование пользователя'
+        return context
+
+class HhUserDeleteView(AccessMixin, DeleteMixin, DeleteView, ):
+    model = HhUser
+    template_name = 'authapp/users_crud/user_delete.html'
+
+    def get_success_url(self):
+        return reverse('authapp:users_list')
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title'] = 'Удаление пользователя'
+        return context
 
 
 class HhUserCreateAPIView(APIView):

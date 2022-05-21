@@ -1,0 +1,14 @@
+{% extends 'authapp/base.html' %}
+
+{% block content %}
+    <div class="del_block">
+            Уверены, что хотите удалить пользователя {{ user.name }}?
+        <form method="post">
+            {% csrf_token %}
+            <input type="submit" class="btn-block btn-danger col-lg-12" value="Да">
+        </form>
+        <button onclick="document.location='{% url 'authapp:users_list' %}'" class="btn-block btn-success col-lg-12">
+            Отмена
+        </button>
+    </div>
+{% endblock %}

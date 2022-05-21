@@ -1,0 +1,22 @@
+{% extends 'adminapp/base.html' %}
+
+{% block content %}
+    <div class="del_block">
+        {% if object.is_active %}
+            Уверены, что хотите удалить пользователя {{ user.name }}?
+        {% else %}
+            Уверены, что хотите востановить пользователя?
+        {% endif %}
+        <form method="post">
+            {% if object.is_active %}
+                <label><input type="checkbox" name="del_box" value="True">Удалить полностью</label>
+                <br>
+            {% endif %}
+            {% csrf_token %}
+            <input type="submit" class="btn-block btn-danger col-lg-12" value="Да">
+        </form>
+        <button onclick="document.location='{% url 'adminapp:user_list' %}'" class="btn-block btn-success col-lg-12">
+            Отмена
+        </button>
+    </div>
+{% endblock %}

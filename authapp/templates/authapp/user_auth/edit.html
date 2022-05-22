@@ -11,7 +11,8 @@
         {% csrf_token %}
         {{ edit_form.as_p }}
         {{ edit_profile_form.as_p }}
-        <input type="submit" value="Cохранить">
+        <img src="{{ user.avatar|media_for_users }}" alt="avatar"/>
+        <input class="auth_button" type="submit" value="Cохранить">
     </form>
-    <img src="{{ user.avatar|media_for_users }}" alt="avatar"/>
+{#    <img src="{{ user.avatar|media_for_users }}" alt="avatar"/>#}
 {% endblock %}

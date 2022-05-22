@@ -6,13 +6,14 @@
     <h2>Выберите из представленных</h2>
     <form action="{% url 'authapp:skills_add' %}" method="POST"  enctype="multipart/form-data">
         {% csrf_token %}
-        {{ user_skills_form.as_p }}
-        <input name="add_user_skill" type="submit" value="Cохранить">
+            {{ user_skills_form.as_p }}
+{#        {{ user_skills_form.as_p }}#}
+        <input class="auth_button" name="add_user_skill" type="submit" value="Cохранить скиллы">
     </form>
     <h2>Или добавьте новый скилл</h2>
     <form action="{% url 'authapp:skills_add' %}" method="POST" enctype="multipart/form-data">
         {% csrf_token %}
         {{ skill_form.as_p }}
-        <input name="add_skill" type="submit" value="Cохранить">
+        <input class="auth_button" name="add_skill" type="submit" value="Добавить скилл">
     </form>
 {% endblock %}

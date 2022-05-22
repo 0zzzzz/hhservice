@@ -34,7 +34,11 @@
                     </a>
                     <br>
                     <a class="user_edit_button" href={% url 'authapp:user_delete' object.pk %}>
-                        удалить
+                        {% if object.is_active %}
+                            удалить
+                        {% else %}
+                            восстановить
+                        {% endif %}
                     </a>
                 </div>
             </div>

@@ -22,24 +22,6 @@ class AccessMixin:
         return super().dispatch(request, *args, **kwargs)
 
 
-class DeleteMixin:
-    def delete(self, request, *args, **kwargs):
-        success_url = self.get_success_url()
-        if request.method == 'POST':
-            checkbox = request.POST.get('del_box', None)
-        if checkbox:
-            self.object = self.get_object()
-            self.object.delete()
-            return HttpResponseRedirect(success_url)
-        else:
-            self.object = self.get_object()
-            if self.object.is_active:
-                self.object.is_active = False
-            else:
-                self.object.is_active = True
-            self.object.save()
-            return HttpResponseRedirect(success_url)
-
 
 def login(request):
     """Страница логина"""
@@ -195,7 +177,7 @@ class SkillDeleteView(AccessMixin, DeleteView):
 class HhUserCreateView(AccessMixin, CreateView):
     model = HhUser
     template_name = 'authapp/users_crud/user_form.html'
-    success_url = reverse_lazy('adminapp:user_list')
+    success_url = reverse_lazy('authapp:users_list')
     form_class = HhUserRegisterForm
 
     def get_context_data(self, *args, **kwargs):
@@ -226,7 +208,8 @@ class HhUserUpdateView(AccessMixin, UpdateView):
         context['title'] = 'Редактирование пользователя'
         return context
 
-class HhUserDeleteView(AccessMixin, DeleteMixin, DeleteView, ):
+
+class HhUserDeleteView(AccessMixin, DeleteView):
     model = HhUser
     template_name = 'authapp/users_crud/user_delete.html'
 
@@ -237,6 +220,20 @@ class HhUserDeleteView(AccessMixin, DeleteMixin, DeleteView, ):
         context = super().get_context_data(**kwargs)
         context['title'] = 'Удаление пользователя'
         return context
+
+    def form_valid(self, form,  *args, **kwargs):
+        success_url = self.get_success_url()
+        checkbox = self.request.POST.get('del_box', None)
+        if checkbox:
+            self.object.delete()
+            return HttpResponseRedirect(success_url)
+        else:
+            if self.object.is_active:
+                self.object.is_active = False
+            else:
+                self.object.is_active = True
+            self.object.save()
+            return HttpResponseRedirect(success_url)
 
 
 class HhUserCreateAPIView(APIView):

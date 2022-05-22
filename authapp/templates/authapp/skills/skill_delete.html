@@ -4,10 +4,6 @@
     <div class="del_block">
             Уверены, что хотите удалить скилл?
         <form method="post">
-            {% if object.is_active %}
-                <label><input type="checkbox" name="del_box" value="True">Удалить полностью</label>
-                <br>
-            {% endif %}
             {% csrf_token %}
             <input type="submit" class="btn-block btn-danger col-lg-12" value="Да">
         </form>

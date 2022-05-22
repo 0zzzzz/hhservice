@@ -4,7 +4,7 @@
 
 {% block content %}
     <div class="users_list">
-        <a class="useadd_button" href={% url 'auth:user_create' %}>
+        <a class="useradd_button" href={% url 'auth:user_create' %}>
             <span>новый пользователь</span>
         </a>
         {% for object in object_list %}

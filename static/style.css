@@ -55,8 +55,11 @@ html, body {
     border-color: #000000;
     font-size: 20px;
     text-align: center;
-    color: #000000;
+    color: #555;
     width: 100%;
+}
+.auth_button:hover {
+    color: #000;
 }
 
 .admin_container .menu span {
@@ -160,14 +163,14 @@ html, body {
     height: 36px;
     border-radius: 5px;
     font-size: 20px;
-    padding: 3px 10px 9px 44px;
+    padding: 5px 10px 9px 44px;
     text-align: center;
     color: #555;
     font-weight: 600;
     text-decoration: none;
 }
 
-.useadd_button {
+.useradd_button {
     background-image: url(/static/img/plus_cross.png);
     background-repeat: no-repeat;
     height: 36px;
@@ -178,6 +181,12 @@ html, body {
     color: #555;
     font-weight: 600;
     text-decoration: none;
+}
+
+.useradd_button:hover {
+    background-image: url(/static/img/plus_cross_hover.png);
+    text-decoration: none;
+    color: #000000;
 }
 
 .skilladd_button:hover {
@@ -193,6 +202,10 @@ html, body {
     height: 30px;
     margin: 5px auto;
     padding: 0 15px;
+}
+
+.skills_list a:hover {
+    color:#000;
 }
 
 .skills_list a {
@@ -213,6 +226,7 @@ html, body {
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap;
+        color: #0f0f0f;
 }
 
 .index_block_avatar {
@@ -231,8 +245,16 @@ html, body {
     border-radius: 25px;
 }
 
+.user_edit_button:hover{
+    color: #000;
+}
+
 .admin_highlight {
     border-color: #8c0000;
     border-style: solid;
     border-width: 5px;
+}
+
+.checkbox{
+    color: #0f0f0f;
 }
